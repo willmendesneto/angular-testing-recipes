@@ -1,16 +1,21 @@
 (function() {
   'use strict';
 
+  angular.module('myApp', [])
+    .controller('SampleController', SampleController);
+
   function SampleController($scope) {
     var vm = this;
 
+    vm.bar = bar;
+    vm.doSomething = doSomething;
     vm.foo = 'bar';
 
-    vm.bar = function() {
+    function bar() {
       vm.foo = 'baz';
-    };
+    }
 
-    vm.doSomething = function() {};
+    function doSomething() {}
 
     $scope.$watch('baz', function(newVal) {
       if (newVal) {
@@ -27,7 +32,4 @@
     //scope.$on()
     //scope.$apply()
   }
-
-  angular.module('myApp', [])
-    .controller('SampleController', SampleController);
 }());

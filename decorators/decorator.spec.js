@@ -1,17 +1,3 @@
-# Decorators
-> Testing recipes for decorators
-
-## Table of contents
-
-- [Boilerplate](#boilerplate)
-
-
-## Boilerplate
-
-Before start we need to initialize the related controller and mock it's dependencies.
-In cases of decorator's use, we should call them in `angular.conf()` method for initialization.
-
-```javascript
 describe('Decorator: $rootScope', function() {
   var $rootScope;
 
@@ -34,5 +20,3 @@ describe('Decorator: $rootScope', function() {
     expect(console.log).toHaveBeenCalledWith(3);
   });
 });
-
-```

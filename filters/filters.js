@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  angular.module('myApp', [])
+  angular.module('myApp')
     .filter('trim', function () {
       return function (input) {
         var str;

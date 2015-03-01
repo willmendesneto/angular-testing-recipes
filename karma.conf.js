@@ -25,7 +25,10 @@ module.exports = {
       'directives/directives.spec.js',
 
       'decorators/decorators.js',
-      'decorators/decorators.spec.js'
+      'decorators/decorators.spec.js',
+
+      'filters/filters.js',
+      'filters/filters.spec.js',
     ],
 
 

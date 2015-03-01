@@ -4,7 +4,7 @@
 ## Table of contents
 
 - [Boilerplate](#boilerplate)
-- [Exposed properties](#expose-properties)
+- [Public properties](#public-properties)
 - [Exposed methods](#expose-methods)
 - [Methods from other services](#methods-from-other-services)
 - [$http]($http)
@@ -29,5 +29,44 @@ describe('SampleService', function() {
   ...
 });
 ```
+
+## Public properties
+
+To test public properties, all you need to do is access them directly from the `sampleService`:
+
+Test:
+
+```js
+it('should expose a property', function() {
+    expect(sampleService.foo).toBe('bar');
+});
+```
+
+Code:
+
+```js
+var service = {
+  foo: 'bar'
+};
+
+return service;
+```
+
+## Exposed methods
+
+...
+
+## Methods from other services
+
+...
+
+
+## $http
+
+...
+
+## Promises
+
+...
 
 

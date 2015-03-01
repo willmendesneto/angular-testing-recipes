@@ -14,7 +14,7 @@
 Before start we need to initialize the related filter and mock it's dependencies.
 
 ```javascript
-// filter.spec.js
+// filters.spec.js
 describe('Filter: trim', function () {
   'use strict';
 
@@ -26,61 +26,52 @@ describe('Filter: trim', function () {
     trim = $filter('trim');
   }));
 
-  it('should return the input string without spaces in left and right sides', function () {
-    var text = '    angularjs  ';
-    expect(trim(text)).toBe('angularjs');
-  });
-
-  it('should return the input string empty if input element value is equal "undefined" or "null" ', function () {
-    expect(trim(undefined)).toBe('');
-    expect(trim(null)).toBe('');
-  });
-
+  ...
 });
 ```
 
 
 ## Best Practices
 
-> Upgrading your filter and your tests for filter
 
-### Doesn't use any special characters and namespace
+### Doesn't use any special characters or "namespaces"
 
-Recently was approached something that works on, but it wasn't right. In one of the issues openned on AngularJS Github repository was discussed a scenario which uses the concept of namespaces (like jQuery namespace "my.awesome.namespace"). This scenario was possible until the 1.3.2 version of the framework and beyond this format version did not work properly.
-
-This issue raised a very interesting discussion, finished with something that was correct, but that wasn't included in filters documentation that we must be not use special characters to define the filter name. If you would like to track more information about the discussion worth giving a look at issue #10110 addressing this topic.
-
-- [Issue #10110](https://github.com/angular/angular.js/issues/10110)
+Check [this issue](https://github.com/angular/angular.js/issues/10110) in the angular.js repository for more info.
 
 
 ### Combining filters
 
-If you use a $filter with another filter dependencies or use a filter with strategy pattern is simple as well, since you will have to test all filters and parameters. An example of a filter with this strategy pattern is the `snakeCase` filter using `trim` internally.
+If you're combining filters or using strategy pattern its still simple to test.
+Let's consider the ```snakeCase``` filter which uses the ```trim``` filter internally:
 
 ```javascript
 angular.module('myApp')
-  .filter('snakeCase', ['$filter', function ($filter) {
-    return function (input) {
+  .filter('snakeCase', function($filter) {
+    return function(input) {
       if (input === null || input === undefined) {
         input = '';
       }
 
       // Using `trim` filter that already exist
       var $trim = $filter('trim');
-      return $trim(input).replace(/([a-z\d])([A-Z]+)/g, '$1_$2').replace(/[-\s]+/g, '_').toLowerCase();
+      return $trim(input)
+        .replace(/([a-z\d])([A-Z]+)/g, '$1_$2')
+        .replace(/[-\s]+/g, '_')
+        .toLowerCase();
     };
   }]);
 ```
 
-And the test for `snakeCase` filter is very simple. Nothing is modified because the trim filter already was tested in our app.
+The unit tests for ```snakeCase``` filter will follow the same strategy as the ```trim``` filter, without worrying about
+each other. They must be all separated even one using the other as a dependency.
 
 ```javascript
-describe('Filter: snakeCase', function () {
+describe('snakeCase', function () {
   'use strict';
 
   var snakeCase;
 
-  beforeEach(module('keepr'));
+  beforeEach(module('myApp'));
 
   beforeEach(inject(function ($filter) {
     snakeCase = $filter('snakeCase');
@@ -95,6 +86,8 @@ describe('Filter: snakeCase', function () {
     expect(snakeCase(undefined)).toBe('');
     expect(snakeCase(null)).toBe('');
   });
-
 });
 ```
+
+In some cases you may want to mock  dependencies to simplify the tests. For more details about `$filter`, [take a look in post "AngularJS: About $filter"](http://willmendesneto.github.io/2014/12/14/angular-js-about-filter/)
+

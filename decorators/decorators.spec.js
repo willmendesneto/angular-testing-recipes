@@ -1,4 +1,6 @@
 describe('Decorator: $rootScope', function() {
+  'use strict';
+
   var $rootScope;
 
   beforeEach(module('myApp'));

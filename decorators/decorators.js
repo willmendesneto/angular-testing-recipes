@@ -1,9 +1,6 @@
 (function() {
   'use strict';
 
-  angular.module('myApp')
-    .config(rootScopeConfig);
-
   function rootScopeConfig($provide) {
     $provide.decorator('$rootScope', RootScopeDecorator);
   }
@@ -19,7 +16,6 @@
 
     // augument the apply method to log how many times
     // it was called
-    $delegate.$apply = loggerify($delegate.$apply);
     function loggerify(fn) {
       return function() {
         fn.apply(this, arguments);
@@ -27,8 +23,15 @@
         times += 1;
       };
     }
+
+    $delegate.$apply = loggerify($delegate.$apply);
+
     return $delegate;
   }
 
   RootScopeDecorator.$inject = ['$delegate'];
+
+  angular.module('myApp')
+    .config(rootScopeConfig);
+
 }());

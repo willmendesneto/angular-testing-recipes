@@ -1,4 +1,6 @@
 describe('SampleController', function() {
+  'use strict';
+
   var $rootScope,
     ctrl, scope;
 

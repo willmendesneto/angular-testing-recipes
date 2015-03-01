@@ -1,21 +1,7 @@
 (function() {
   'use strict';
 
-  angular.module('myApp')
-    .factory('sampleService', SampleService)
-    .factory('dummyService', DummyService);
-
   function SampleService($http, $q, dummyService) {
-    var service = {
-      foo: 'bar',
-      bar: bar,
-      baz: baz,
-      getData: getData,
-      getResults: getResults,
-      useAnotherMethod: useAnotherMethod
-    };
-
-    return service;
 
     function bar() {
       service.foo = 'baz';
@@ -37,8 +23,7 @@
 
     function getResults(index) {
       var result = [1, 2, 3, 4, 5],
-          resultLen = result.length;
-      var deferred = $q.defer();
+          deferred = $q.defer();
 
       if (index >= 0 && index < result.length) {
         deferred.resolve(result[index]);
@@ -54,20 +39,22 @@
         return result;
       });
     }
+
+    var service = {
+      foo: 'bar',
+      bar: bar,
+      baz: baz,
+      getData: getData,
+      getResults: getResults,
+      useAnotherMethod: useAnotherMethod
+    };
+
+    return service;
   }
 
   SampleService.$inject = ['$http', '$q', 'dummyService'];
 
-
-
-
   function DummyService($q) {
-    var service = {
-      someMethod: someMethod,
-      anotherMethod: anotherMethod
-    };
-
-    return service;
 
     function someMethod() {
       return 'bla';
@@ -80,8 +67,19 @@
 
       return deferred.promise;
     }
+
+    var service = {
+      someMethod: someMethod,
+      anotherMethod: anotherMethod
+    };
+
+    return service;
   }
 
   DummyService.$inject = ['$q'];
+
+  angular.module('myApp')
+    .factory('sampleService', SampleService)
+    .factory('dummyService', DummyService);
 
 }());

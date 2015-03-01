@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var jshint = require('gulp-jshint');
+var stylish = require('jshint-stylish');
 
 var _ = require('lodash');
 var karma = require('karma').server;
@@ -14,7 +15,10 @@ gulp.task('tdd', function(done) {
 });
 
 gulp.task('jshint', function() {
-  gulp.src(['controllers/*.js', 'directives/*.js', 'decorators/*.js', 'filters/*.js', 'services/*.js'])
-    .pipe(jshint('.jshintrc'))
-    .pipe(jshint.reporter('jshint-stylish'));
+  return gulp.src('./{controllers,decorators,directives,filters,services}/*.js')
+    .pipe(jshint())
+    .pipe(jshint.reporter(stylish))
+    .pipe(jshint.reporter('fail'));
 });
+
+gulp.task('default', ['jshint', 'test']);

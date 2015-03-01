@@ -62,8 +62,8 @@ angular.module('myApp')
   }]);
 ```
 
-The unit tests for ```snakeCase``` filter will follow the same strategy as the ```trim``` filter, without worrying about 
-each other. They must be all separated even one using the other as a dependency. 
+The unit tests for ```snakeCase``` filter will follow the same strategy as the ```trim``` filter, without worrying about
+each other. They must be all separated even one using the other as a dependency.
 
 ```javascript
 describe('snakeCase', function () {
@@ -89,5 +89,5 @@ describe('snakeCase', function () {
 });
 ```
 
-In some cases you may want to mock  dependencies to simplify the tests. 
+In some cases you may want to mock  dependencies to simplify the tests.
 

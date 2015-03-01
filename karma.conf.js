@@ -20,6 +20,10 @@ module.exports = {
 
       'services/services.js',
       'services/services.spec.js',
+      'services/services.http.js',
+      'services/services.http.spec.js',
+      'services/services.builtin.js',
+      'services/services.builtin.spec.js',
 
       'directives/directives.js',
       'directives/directives.spec.js',

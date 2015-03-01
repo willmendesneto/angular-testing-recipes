@@ -12,8 +12,7 @@
   - [ampersand (&)](#ampersand-)
 - [Transclusion](#transclusion)
 - [jQlite/jQuery Events](#jqlite-jquery-events)
-- [Best Practices](#best-practices)
-  - [Working with thin directives](#working-with-thin-directives)
+- [Working with thin directives](#working-with-thin-directives)
 
 
 ## Boilerplate
@@ -38,7 +37,7 @@ describe('sampleDirective', function() {
 
     // invoke the directive as an angular element
     elem = angular.element(
-      '<div sample-directive foo-isolate="bar" bar="{{ ::baz }}">' +
+      '<div sample-directive foo-isolate="bar" bar="{{ ::baz }}" baz="doSomething()">' +
       ' <h1>foo</h1>' +
       '</div>'
     );
@@ -70,6 +69,19 @@ describe('sampleDirective', function() {
 
     expect(isolateScope.bar).toBe('foo');
   });
+
+  it('should expose a property to the isolateScope as `&`', function() {
+    spyOn(console, 'log');
+
+    scope.doSomething = function() {
+      console.log('lol');
+    };
+
+    isolateScope.baz();
+
+    expect(console.log).toHaveBeenCalledWith('lol');
+  });
+
 
   describe('#DOM events', function() {
     it('should log something when the user clicks in the element', function() {
@@ -141,10 +153,8 @@ transclude: true
 
 AngularJS uses jQlite in your core by default, but your can use jQuery in your directives too. If jQuery is available, `angular.element` is an alias for the jQuery function, or delegates to Angular's built-in subset of jQuery, called "jQuery lite" or "jqLite.", a tiny, API-compatible subset of jQuery that allows Angular to manipulate the DOM in a cross-browser compatible way.
 
-## Best Practices
 
-
-### Working with thin directives
+## Working with thin directives
 
 The thin directives conception is based in construction of an angular directive using other components (as Controllers Services, factories, etc.) based on a directive for better integration and testability. With this approach the tests are much simpler, as you delegate some responsibilities to other Angular components.
 
@@ -222,13 +232,15 @@ describe('Directive: navbar', function () {
   var element,
     template,
     httpBackend,
+    rootScope,
     scope;
 
   // load the directive's module
   beforeEach(module('myApp'));
 
   beforeEach(inject(function ($rootScope, $compile, _$httpBackend_) {
-    scope = $rootScope.$new();
+    rootScope = $rootScope;
+    scope = rootScope.$new();
     httpBackend = _$httpBackend_;
 
     template = '<div class="header">' +
@@ -238,30 +250,31 @@ describe('Directive: navbar', function () {
       '</ul>' +
       '<h3 class="text-muted">NAVBAR</h3>' +
     '</div>';
-    httpBackend.whenGET('navbar.tpl.html').respond(template);
+    httpBackend.whenGET('/navbar.tpl.html').respond(template);
 
     element = angular.element(template);
     element = $compile(element)(scope);
+
   }));
 
   it('should create a navbar header with ".header" class in element', function () {
     expect(element.hasClass('header')).toBeTruthy();
   });
 
-  it('should create a navbar header with ng-controller value equals "NavbarCtrl"', function () {
-    expect(element.attr('ng-controller')).toEqual('NavbarCtrl');
+  it('should set "ng-scope" class in template', function () {
+    expect(element.hasClass('ng-scope')).toBeTruthy();
   });
 
 });
 ```
 
 ```javascript
-// navbar.ctrl.spec.js
 describe('Controller: NavbarCtrl', function () {
   'use strict';
 
-  var NavbarCtrl,
+  var navbarCtrl,
     scope,
+    rootScope,
     location;
 
   // load the controller's module
@@ -270,8 +283,9 @@ describe('Controller: NavbarCtrl', function () {
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope, $location) {
     location = $location;
-    scope = $rootScope.$new();
-    NavbarCtrl = $controller('NavbarCtrl', {
+    rootScope = $rootScope;
+    scope = rootScope.$new();
+    navbarCtrl = $controller('NavbarCtrl', {
       $scope: scope
     });
   }));
@@ -280,22 +294,22 @@ describe('Controller: NavbarCtrl', function () {
 
     it('should return "true" when paths are the same', function () {
       location.path('/');
-      expect(scope.isActive('/')).toBeTruthy();
+      expect(navbarCtrl.isActive('/')).toBeTruthy();
     });
 
     it('should return "false" when paths aren\'t the same', function () {
       location.path('/');
-      expect(scope.isActive('/error')).toBeFalsy();
+      expect(navbarCtrl.isActive('/error')).toBeFalsy();
     });
 
     it('should return "true" when word starts are the same', function () {
       location.path('/contacts/1/edit');
-      expect(scope.isActive('/contacts')).toBeTruthy();
+      expect(navbarCtrl.isActive('/contacts')).toBeTruthy();
     });
 
     it('should return "true" when word starts are the same followed by query string', function () {
       location.path('/contacts?id=1');
-      expect(scope.isActive('/contacts')).toBeTruthy();
+      expect(navbarCtrl.isActive('/contacts')).toBeTruthy();
     });
 
   });

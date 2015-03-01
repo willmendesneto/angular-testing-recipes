@@ -17,7 +17,7 @@ describe('sampleDirective', function() {
 
     // invoke the directive as an angular element
     elem = angular.element(
-      '<div sample-directive foo-isolate="bar" bar="{{ ::baz }}">' +
+      '<div sample-directive foo-isolate="bar" bar="{{ ::baz }}" baz="doSomething()">' +
       ' <h1>foo</h1>' +
       '</div>'
     );
@@ -49,6 +49,19 @@ describe('sampleDirective', function() {
 
     expect(isolateScope.bar).toBe('foo');
   });
+
+  it('should expose a property to the isolateScope as `&`', function() {
+    spyOn(console, 'log');
+
+    scope.doSomething = function() {
+      console.log('lol');
+    };
+
+    isolateScope.baz();
+
+    expect(console.log).toHaveBeenCalledWith('lol');
+  });
+
 
   describe('#DOM events', function() {
     it('should log something when the user clicks in the element', function() {

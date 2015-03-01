@@ -11,7 +11,8 @@
       link: linkFn,
       scope: {
         fooIsolate: '=',
-        bar: '@'
+        bar: '@',
+        baz: '&'
       },
       transclude: true
     };

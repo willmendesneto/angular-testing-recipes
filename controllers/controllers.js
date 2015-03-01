@@ -1,17 +1,8 @@
 (function() {
   'use strict';
 
-  angular.module('myApp')
-    .controller('SampleController', SampleController);
-
   function SampleController($scope) {
     var vm = this;
-
-    vm.bar = bar;
-    vm.doSomething = doSomething;
-    vm.sendMessage = sendMessage;
-    vm.broadcastEvent = broadcastEvent;
-    vm.foo = 'bar';
 
     function bar() {
       vm.foo = 'baz';
@@ -37,7 +28,17 @@
       vm.doSomething();
     });
 
+    vm.bar = bar;
+    vm.doSomething = doSomething;
+    vm.sendMessage = sendMessage;
+    vm.broadcastEvent = broadcastEvent;
+    vm.foo = 'bar';
+
     //scope.$on()
     //scope.$apply()
   }
+
+  angular.module('myApp')
+    .controller('SampleController', SampleController);
+
 }());

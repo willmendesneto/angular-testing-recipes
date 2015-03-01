@@ -17,9 +17,9 @@ $ karma start
 
 ## Table of contents
 
-- [Controllers](https://github.com/cironunes/angular-testing-recipes/tree/master/controller)
-- [Filters](https://github.com/cironunes/angular-testing-recipes/tree/master/filters)
-- [Services](https://github.com/cironunes/angular-testing-recipes/tree/master/services)
-- [Decorators](https://github.com/cironunes/angular-testing-recipes/tree/master/decorators)
-- [Directives](https://github.com/cironunes/angular-testing-recipes/tree/master/directives)
-- [E2E](https://github.com/cironunes/angular-testing-recipes/tree/master/E2E)
+- [Controllers](controller/)
+- [Filters](filters/)
+- [Services](services/)
+- [Decorators](decorators/)
+- [Directives](directives/)
+- [E2E](E2E/)

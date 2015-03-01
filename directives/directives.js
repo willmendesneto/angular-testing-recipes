@@ -2,6 +2,15 @@
   'use strict';
 
   function SampleDirective() {
+
+    function linkFn($scope, $element) {
+      $element.on('click', function() {
+        console.log('something');
+      });
+
+      $scope.foo = 'bar';
+    }
+
     var directive = {
       template: '<div>' +
       ' <h1>Hello world!</h1>' +
@@ -18,14 +27,6 @@
     };
 
     return directive;
-
-    function linkFn($scope, $element) {
-      $element.on('click', function() {
-        console.log('something');
-      });
-
-      $scope.foo = 'bar';
-    }
   }
 
   angular.module('myApp')

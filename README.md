@@ -17,7 +17,7 @@ $ karma start
 
 ## Table of contents
 
-- [Controllers](controller/)
+- [Controllers](controllers/)
 - [Filters](filters/)
 - [Services](services/)
 - [Decorators](decorators/)

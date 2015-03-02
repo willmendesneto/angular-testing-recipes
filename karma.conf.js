@@ -15,20 +15,7 @@ module.exports = {
 
       'app.js',
 
-      'controllers/controllers.js',
-      'controllers/controllers.spec.js',
-
-      'services/services.js',
-      'services/services.spec.js',
-
-      'directives/directives.js',
-      'directives/directives.spec.js',
-
-      'decorators/decorators.js',
-      'decorators/decorators.spec.js',
-
-      'filters/filters.js',
-      'filters/filters.spec.js'
+      '{controllers,services,directives,decorators,filters}/*.js'
     ],
 
 

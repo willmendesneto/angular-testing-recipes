@@ -66,6 +66,7 @@ describe('angularjs homepage todo list', function() {
 
 ## Best Practices
 
+PS: Please read the [Protractor FAQ Q&A docs](https://github.com/angular/protractor/blob/master/docs/faq.md)
 
 ### Page Objects
 

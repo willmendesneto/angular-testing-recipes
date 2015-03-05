@@ -59,7 +59,7 @@ angular.module('myApp')
         .replace(/[-\s]+/g, '_')
         .toLowerCase();
     };
-  }]);
+  });
 ```
 
 The unit tests for ```snakeCase``` filter will follow the same strategy as the ```trim``` filter, without worrying about

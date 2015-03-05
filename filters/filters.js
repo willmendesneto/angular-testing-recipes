@@ -16,4 +16,21 @@
         }
       };
     });
+
+  angular.module('myApp')
+    .filter('snakeCase', function($filter) {
+      return function(input) {
+        if (input === null || input === undefined) {
+          input = '';
+        }
+
+        // Using `trim` filter that already exist
+        var $trim = $filter('trim');
+        return $trim(input)
+          .replace(/([a-z\d])([A-Z]+)/g, '$1_$2')
+          .replace(/[-\s]+/g, '_')
+          .toLowerCase();
+      };
+    });
+
 }());

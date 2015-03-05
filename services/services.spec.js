@@ -103,5 +103,11 @@ describe('SampleService', function() {
       expect(dummyService.anotherMethod).toHaveBeenCalled();
       expect(onUseAnotherMethod).toHaveBeenCalledWith([2, 3, 4]);
     });
+
+    it('#anotherMethod', function () {
+      dummyService.anotherMethod().then(function (data) {
+        expect(data.length).toBe(3);
+      });
+    });
   });
 });

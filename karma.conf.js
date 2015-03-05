@@ -15,7 +15,9 @@ module.exports = {
 
       'app.js',
 
-      '{controllers,services,directives,decorators,filters}/*.js'
+      '{controllers,services,directives,decorators,filters}/*.js',
+
+      '**/*.tpl.html'
     ],
 
 
@@ -27,6 +29,7 @@ module.exports = {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      '**/*.tpl.html': 'ng-html2js'
     },
 
 

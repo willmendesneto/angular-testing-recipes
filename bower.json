@@ -1,8 +1,9 @@
 {
   "name": "angular-testing-recipes",
   "version": "0.0.0",
-  "homepage": "https://github.com/cironunes/angular-testing-recipes",
+  "homepage": "https://github.com/willmendesneto/angular-testing-recipes",
   "authors": [
+    "Wilson Mendes <willmendesneto@gmail.com>",
     "Ciro Nunes <ciroanunes@gmail.com>"
   ],
   "license": "MIT",

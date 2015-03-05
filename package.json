@@ -6,14 +6,14 @@
   "scripts": {},
   "repository": {
     "type": "git",
-    "url": "https://github.com/cironunes/angular-testing-recipes.git"
+    "url": "https://github.com/willmendesneto/angular-testing-recipes.git"
   },
-  "author": "Ciro Nunes",
+  "author": ["Wilson Mendes", "Ciro Nunes"],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/cironunes/angular-testing-recipes/issues"
+    "url": "https://github.com/willmendesneto/angular-testing-recipes/issues"
   },
-  "homepage": "https://github.com/cironunes/angular-testing-recipes",
+  "homepage": "https://github.com/willmendesneto/angular-testing-recipes",
   "devDependencies": {
     "gulp": "^3.8.11",
     "gulp-jshint": "^1.9.2",

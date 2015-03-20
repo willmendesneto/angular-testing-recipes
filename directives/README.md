@@ -11,6 +11,7 @@
   - [At sign (@)](#at-sign-)
   - [ampersand (&)](#ampersand-)
 - [Transclusion](#transclusion)
+- [Working with ngModelController](#working-with-ngmodelcontroller)
 - [jQlite/jQuery Events](#jqlite-jquery-events)
 - [Working with thin directives](#working-with-thin-directives)
 
@@ -148,6 +149,105 @@ transclude: true
 
 > Only use `transclude: true` when you want to create a directive that wraps arbitrary content.
 
+
+## Working with ngModelController
+
+Many times when you should use integrations with forms in your application, such as create a new validation/behaviour based in specific format (credit card, for example) or simulate an event in form elements, the `ngModelController` is the better way to do this.
+
+A simple example is to use a directive for force javascript `.focus()` event in a field for field validation. Our directive will be called `kpFocus` and your content is:
+
+```javascript
+// ngModelController.js
+(function() {
+  'use strict';
+
+  function kpFocusLink(scope, element, controller) {
+    controller.$focused = false;
+
+    /**
+     * Activate directive on focus event
+     * @return
+     */
+    element.bind('focus', function(){
+      scope.$apply(function(){
+        controller.$focused = true;
+      });
+    })
+
+    /**
+     * Deactivate directive on blur event
+     * @return
+     */
+    .bind('blur', function(){
+      scope.$apply(function(){
+        controller.$focused = false;
+      });
+    });
+
+    /**
+     * Destroy events on "$destroy" scope event
+     * @return
+     */
+    scope.$on('$destroy', function() {
+      element.unbind('blur focus');
+    });
+  }
+
+  function kpFocus() {
+    var directive = {
+      restrict: 'A',
+      require: 'ngModel',
+      link: kpFocusLink
+    };
+
+    return directive;
+  }
+
+  angular.module('myApp')
+    .directive('kpFocus', kpFocus);
+
+}());
+```
+
+
+For attend this specifications, our test will be:
+
+```javascript
+// ngModelController.spec.js
+describe('Directive: kpFocus', function () {
+'use strict';
+
+  var element,
+    scope;
+
+  // load the directive's module
+  beforeEach(module('myApp'));
+
+  beforeEach(inject(function ($rootScope, $compile) {
+
+    scope = $rootScope.$new();
+    scope.x = '1234567890xpto';
+    element = $compile('<input kp-focus type="text" placeholder="My awesome placeholder" ng-model="x" required />')(scope);
+    scope.$digest();
+  }));
+
+  it('should have a kp-focus defined', function() {
+    expect(element).toBeDefined();
+  });
+
+  it('should have a form field required in focus', function() {
+    spyOn(scope, '$apply');
+
+    element.val('baz');
+    element.triggerHandler('focus');
+
+    expect(scope.$apply).toHaveBeenCalled();
+
+    element.triggerHandler('blur');
+    expect(scope.$apply).toHaveBeenCalled();
+  });
+});
+```
 
 ## jQlite/jQuery Events
 

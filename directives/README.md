@@ -253,6 +253,42 @@ describe('Directive: kpFocus', function () {
 
 AngularJS uses jQlite in your core by default, but your can use jQuery in your directives too. If jQuery is available, `angular.element` is an alias for the jQuery function, or delegates to Angular's built-in subset of jQuery, called "jQuery lite" or "jqLite.", a tiny, API-compatible subset of jQuery that allows Angular to manipulate the DOM in a cross-browser compatible way.
 
+A good tip is create/use Jasmine matchers in this task, for do this job more easy for us. Was created `toHaveClass()` matcher for check if element has some specific class in our expect methods and verifying toggle click event.
+
+```javascript
+describe('Testing directive using jquery plugin', function() {
+  'use strict';
+
+  var element,
+    scope;
+
+  //you need to indicate your module in a test
+  beforeEach(module('myApp'));
+
+  beforeEach(inject(function($rootScope, $compile) {
+    scope = $rootScope.$new();
+    var template = '<div id="format-toolbar1" class="settings-button" toolbar-tip="{content: \'#format-toolbar-options\', position: \'top\'}">' +
+        '<img src="http://paulkinzett.github.com/toolbar/img/icon-cog-small.png">' +
+    '</div>' +
+    '<div id="format-toolbar-options">' +
+        '<a href="#"><i class="icon-align-left"></i></a>' +
+        '<a href="#"><i class="icon-align-center"></i></a>' +
+        '<a href="#"><i class="icon-align-right"></i></a>' +
+    '</div>';
+    element = angular.element(template);
+    element = $compile(element)(scope);
+    scope.$digest();
+  }));
+
+  it('should activate toggle click event in plugin', function() {
+    expect(element).not.toHaveClass('pressed');
+    element.click();
+    expect(element).toHaveClass('pressed');
+    element.click();
+    expect(element).not.toHaveClass('pressed');
+  });
+});
+```
 
 ## Working with thin directives
 

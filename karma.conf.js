@@ -10,8 +10,11 @@ module.exports = {
 
     // list of files / patterns to load in the browser
     files: [
+      'bower_components/jquery/jquery.min.js',
+      'bower_components/toolbar/jquery.toolbar.js',
       'bower_components/angular/angular.js',
       'bower_components/angular-mocks/angular-mocks.js',
+      'helpers.js',
 
       'app.js',
 

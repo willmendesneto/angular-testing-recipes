@@ -119,7 +119,20 @@ The directive has give to us 2 optional parameters:
 
 ## DOM Events
 
-In Directives there are many cases we need to work with pure DOM, using bindings and other DOM specs.
+In Directives there are many cases we need to work with pure DOM, using bindings and other DOM specs. In our example the click event is simulated for tests.
+
+```javascript
+  ...
+  describe('#DOM events', function() {
+    it('should log something when the user clicks in the element', function() {
+      spyOn(console, 'log');
+      elem.triggerHandler('click');
+
+      expect(console.log).toHaveBeenCalledWith('something');
+    });
+  });
+  ...
+```
 
 
 ## scope
@@ -149,6 +162,17 @@ transclude: true
 
 > Only use `transclude: true` when you want to create a directive that wraps arbitrary content.
 
+For test this directive behaviour, our directive test is:
+
+```javascript
+  ...
+  describe('#transclusion', function() {
+    it('should transclude the DOM', function() {
+      expect(elem[0].innerHTML).toContain('<h1 class="ng-scope">foo</h1>');
+    });
+  });
+  ...
+```
 
 ## Working with ngModelController
 

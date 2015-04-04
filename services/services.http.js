@@ -1,9 +1,6 @@
 (function() {
   'use strict';
 
-  angular.module('myApp')
-    .factory('SampleHttpService', SampleHttpService);
-
   function SampleHttpService($q, $http, $filter) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     var _params = {
@@ -158,6 +155,9 @@
       },
     };
   }
+
+  angular.module('myApp')
+    .factory('SampleHttpService', SampleHttpService);
 
   SampleHttpService.$inject = ['$q', '$http', '$filter'];
 

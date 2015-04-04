@@ -1,6 +1,6 @@
 // ngModelController.spec.js
 describe('Directive: kpFocus', function () {
-'use strict';
+  'use strict';
 
   var element,
     scope;

@@ -1,9 +1,6 @@
 (function() {
   'use strict';
 
-  angular.module('myApp')
-    .service('TimerService', TimerService);
-
   function TimerService($interval) {
 
     var intervalId;
@@ -35,6 +32,9 @@
       $interval.cancel(intervalId);
     };
   }
+
+  angular.module('myApp')
+    .service('TimerService', TimerService);
 
   TimerService.$inject = ['$interval'];
 

@@ -11,8 +11,8 @@
   - [At sign (@)](#at-sign-)
   - [ampersand (&)](#ampersand-)
 - [Transclusion](#transclusion)
-- [Working with ngModelController](#working-with-ngmodelcontroller)
-- [jQlite/jQuery Events](#jqlite-jquery-events)
+- [Working with ngModel](#working-with-ngmodel)
+- [jQlite/jQuery Events](#jqlitejquery-events)
 - [Working with thin directives](#working-with-thin-directives)
 
 
@@ -174,14 +174,14 @@ For test this directive behaviour, our directive test is:
   ...
 ```
 
-## Working with ngModelController
+## Working with ngModel
 
-Many times when you should use integrations with forms in your application, such as create a new validation/behaviour based in specific format (credit card, for example) or simulate an event in form elements, the `ngModelController` is the better way to do this.
+Many times when you should use integrations with forms in your application, such as create a new validation/behaviour based in specific format (credit card, for example) or simulate an event in form elements, the `ngModel` is the better way to do this.
 
 A simple example is to use a directive for force javascript `.focus()` event in a field for field validation. Our directive will be called `kpFocus` and your content is:
 
 ```javascript
-// ngModelController.js
+// ngModel.js
 (function() {
   'use strict';
 
@@ -237,7 +237,7 @@ A simple example is to use a directive for force javascript `.focus()` event in 
 For attend this specifications, our test will be:
 
 ```javascript
-// ngModelController.spec.js
+// ngModel.spec.js
 describe('Directive: kpFocus', function () {
 'use strict';
 

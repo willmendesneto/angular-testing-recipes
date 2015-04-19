@@ -174,7 +174,7 @@ This event is very usefull for callbacks methods when the bind event is removed.
 
 ### $apply instead $digest
 
-Creating a new $scope and $compile your content, we wrap our changes to $scope using $apply to replace `{{user.name}}` with the final value and compile it. Doing it like this, it renders with the right context. We don’t need to call $digest separately as $apply internally calls $digest once finishes evaluating all changes. You should use `$apply` instead of `$digest`, because `$digest` is already invoked in $apply method internally.
+Creating a new $scope and $compile your content, we wrap our changes to $scope using $apply to replace `{{vm.foo}}` with the final value and compile it. Doing it like this, it renders with the right context. We don’t need to call $digest separately as $apply internally calls $digest once finishes evaluating all changes. You should use `$apply` instead of `$digest`, because `$digest` is already invoked in $apply method internally.
 
 
 ```javascript

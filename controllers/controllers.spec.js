@@ -13,6 +13,7 @@ describe('SampleController', function() {
     ctrl = _$controller_('SampleController', {
       $scope: scope
     });
+    $rootScope.showLogs = false;
   }));
 
   it('should expose a property', function() {
@@ -26,7 +27,7 @@ describe('SampleController', function() {
 
   it('should have a watcher', function() {
     scope.baz = 'foo';
-    scope.$digest();
+    scope.$apply();
     expect(ctrl.baz).toBe('foobar');
   });
 
@@ -40,6 +41,7 @@ describe('SampleController', function() {
     spyOn(scope, '$emit');
 
     ctrl.sendMessage();
+    expect(scope.$emit).toHaveBeenCalled();
     expect(scope.$emit).toHaveBeenCalledWith('sample:message', {
       foo: 'bar'
     });
@@ -49,6 +51,7 @@ describe('SampleController', function() {
     spyOn(scope, '$broadcast');
 
     ctrl.broadcastEvent();
+    expect(scope.$broadcast).toHaveBeenCalled();
     expect(scope.$broadcast).toHaveBeenCalledWith('sample:broadcast', {
       foo: 'bar'
     });

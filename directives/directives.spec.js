@@ -26,6 +26,7 @@ describe('sampleDirective', function() {
     $compile(elem)(scope);
     // get the isolate scope of the directive
     isolateScope = elem.isolateScope();
+    $rootScope.showLogs = false;
   }));
 
   it('should have a template', function() {

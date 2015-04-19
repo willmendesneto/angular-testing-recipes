@@ -27,6 +27,7 @@ describe('Directive: navbar', function () {
 
     element = angular.element(template);
     element = $compile(element)(scope);
+    $rootScope.showLogs = false;
 
   }));
 

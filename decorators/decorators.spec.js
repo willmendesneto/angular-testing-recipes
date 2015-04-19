@@ -7,17 +7,16 @@ describe('Decorator: $rootScope', function() {
 
   beforeEach(inject(function(_$rootScope_) {
     $rootScope = _$rootScope_;
+    $rootScope.showLogs = false;
   }));
 
   it('should log how many times the $apply method was called', function() {
-    spyOn(console, 'log');
 
     $rootScope.$apply();
+    expect($rootScope.times).toBe(1);
     $rootScope.$apply();
+    expect($rootScope.times).toBe(2);
     $rootScope.$apply();
-
-    expect(console.log).toHaveBeenCalledWith(1);
-    expect(console.log).toHaveBeenCalledWith(2);
-    expect(console.log).toHaveBeenCalledWith(3);
+    expect($rootScope.times).toBe(3);
   });
 });

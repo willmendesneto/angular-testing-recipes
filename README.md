@@ -42,4 +42,5 @@ $ gulp
 - [Services](services/)
 - [Decorators](decorators/)
 - [Directives](directives/)
+- [Routes](routes/)
 - [E2E](E2E/)

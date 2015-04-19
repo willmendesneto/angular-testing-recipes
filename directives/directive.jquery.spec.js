@@ -20,6 +20,7 @@ describe('Testing directive using jquery plugin', function() {
     element = angular.element(template);
     element = $compile(element)(scope);
     scope.$digest();
+    $rootScope.showLogs = false;
   }));
 
   it('should activate toggle click event in plugin', function() {

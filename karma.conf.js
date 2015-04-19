@@ -12,13 +12,14 @@ module.exports = {
     files: [
       'bower_components/jquery/jquery.min.js',
       'bower_components/toolbar/jquery.toolbar.js',
-      'bower_components/angular/angular.js',
+      'bower_components/angular/angular.min.js',
+      'bower_components/angular-route/angular-route.min.js',
       'bower_components/angular-mocks/angular-mocks.js',
       'helpers.js',
 
       'app.js',
 
-      '{controllers,services,directives,decorators,filters}/*.js',
+      '{controllers,services,directives,decorators,filters,routes}/*.js',
 
       '**/*.tpl.html'
     ],
@@ -47,7 +48,6 @@ module.exports = {
       type:'html',
       dir:'coverage'
     },
-
 
     // web server port
     port: 9876,

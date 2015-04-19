@@ -7,7 +7,7 @@ describe('Service: SampleHttpService', function () {
 
   beforeEach(module('myApp'));
 
-  beforeEach(inject(function (_SampleHttpService_, _$httpBackend_, $q) {
+  beforeEach(inject(function ($rootScope, _SampleHttpService_, _$httpBackend_, $q) {
     q = $q;
     httpBackend = _$httpBackend_;
     SampleHttpService = _SampleHttpService_;
@@ -20,6 +20,7 @@ describe('Service: SampleHttpService', function () {
       url: '/api/',
       cache: true
     });
+    $rootScope.showLogs = false;
   }));
 
   afterEach(function(){

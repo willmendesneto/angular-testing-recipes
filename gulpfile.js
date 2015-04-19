@@ -26,7 +26,7 @@ gulp.task('tdd', function(done) {
 });
 
 gulp.task('jshint', function() {
-  return gulp.src('./{controllers,decorators,directives,filters,services}/*.js')
+  return gulp.src('./{controllers,decorators,directives,filters,services,routes}/*.js')
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter(stylish))
     .pipe(map(function (file, cb) {

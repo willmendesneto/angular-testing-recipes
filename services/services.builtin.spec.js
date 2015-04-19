@@ -11,9 +11,10 @@ describe('Controller: TimerService', function () {
 
   beforeEach(module('myApp'));
 
-  beforeEach(inject(function (_TimerService_, _$interval_) {
+  beforeEach(inject(function ($rootScope, _TimerService_, _$interval_) {
     $interval = _$interval_;
     TimerService = _TimerService_;
+    $rootScope.showLogs = false;
   }));
 
   it('should set the default log object', function () {

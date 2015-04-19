@@ -13,6 +13,7 @@ describe('SampleService', function() {
 
     sampleService = _sampleService_;
     dummyService = _dummyService_;
+    $rootScope.showLogs = false;
   }));
 
   afterEach(function() {

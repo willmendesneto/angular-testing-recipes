@@ -17,6 +17,7 @@ describe('Controller: NavbarCtrl', function () {
     navbarCtrl = $controller('NavbarCtrl', {
       $scope: scope
     });
+    $rootScope.showLogs = false;
   }));
 
   describe('isActive', function(){

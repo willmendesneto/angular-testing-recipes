@@ -19,7 +19,14 @@
     function loggerify(fn) {
       return function() {
         fn.apply(this, arguments);
-        console.log(times);
+
+        if (this.showLogs === undefined) {
+          this.showLogs = true;
+        }
+        if (!!this.showLogs) {
+          console.log(times);
+        }
+        this.times = times;
         times += 1;
       };
     }

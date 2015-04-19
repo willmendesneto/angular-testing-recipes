@@ -5,8 +5,9 @@ describe('sampleFilter', function () {
 
   beforeEach(module('myApp'));
 
-  beforeEach(inject(function ($filter) {
+  beforeEach(inject(function ($rootScope, $filter) {
     trim = $filter('trim');
+    $rootScope.showLogs = false;
   }));
 
   it('should remove the whitespaces in the start and the end of a text', function () {

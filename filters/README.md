@@ -36,6 +36,20 @@ describe('Filter: trim', function () {
 
 ### Doesn't use any special characters or "namespaces"
 
+When you create your filtes, please attemp for the filter name. These approaches are incorrects:
+
+```
+$filter('my.awesome.filter')(data);
+$filter('myaw2s0mefilter')(data);
+$filter('my@wesomefilter')(data);
+```
+
+For this case, the correct filter is:
+
+```
+$filter('myAwesomeFilter')(data);
+```
+
 Check [this issue](https://github.com/angular/angular.js/issues/10110) in the angular.js repository for more info.
 
 

@@ -1,4 +1,4 @@
-# Filters
+# Routes
 > Testing recipes for routes
 
 ## Table of contents

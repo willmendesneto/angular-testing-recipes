@@ -69,20 +69,20 @@ With watch created, our code coverage is:
   });
 ```
 
-> For more information, please take a look in [angularjs $watch official documentation](angularjs $watch official documentation)
+> For more information, please take a look in [angularjs $watch official documentation](https://docs.angularjs.org/api/ng/type/$rootScope.Scope#$watch)
 
 
 ## Working with events
 
 
-Usually in AngularJS applications we can to create, work and manipulate events created via `$on()`. This method add a listener for event based in AngularJS scope. 
+Usually in AngularJS applications we can to create, work and manipulate events created via `$on()`. This method add a listener for event based in AngularJS scope.
 
-But this events should be tested easily. For help in this job, Jasmine provide spies (`spyOn()` method), that accept many kinds of configuration. 
+But this events should be tested easily. For help in this job, Jasmine provide spies (`spyOn()` method), that accept many kinds of configuration.
 
 
 ### $emit
 
-This method uses [Event Emitter async pattern](Event Emitter async pattern) and enable communication between components based in 1 x 1 communication via. 
+This method uses [Event Emitter async pattern](http://docs.nodejitsu.com/articles/getting-started/control-flow/what-are-event-emitters) and enable communication between components based in 1 x 1 communication via.
 
 ```javascript
   // controllers.js
@@ -112,7 +112,7 @@ One way to test these events is based in this example.
 
 ### $broadcast
 
-This method used [Broadcast pattern](Broadcast pattern). This pattern is very powerfull, because enable communication with all components that have a listener in this channel based in 1 x N. 
+This method used [Broadcast pattern](http://weblogs.asp.net/minhajuddin/event-broadcasting-using-the-observer-design-pattern). This pattern is very powerfull, because enable communication with all components that have a listener in this channel based in 1 x N.
 
 ```javascript
   // controllers.js

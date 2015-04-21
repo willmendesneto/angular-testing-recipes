@@ -17,7 +17,7 @@ http://angular-testing-recipes/#dashboard
 http://angular-testing-recipes/#products
 ```
 
-For example, when the browser loads these links, the same AngularJS application will be loaded (located at http://angular-testing-recipes/index.html), but AngularJS will look at the route (the part of the URL after the #) and decide what HTML template to show. 
+For example, when the browser loads these links, the same AngularJS application will be loaded (located at http://angular-testing-recipes/index.html), but AngularJS will look at the route (the part of the URL after the #) and decide what HTML template to show.
 
 ## Why to test angular routes in my app?
 
@@ -38,7 +38,7 @@ http://angular-testing-recipes/#product/1/edit
   ...
 ```
 
-This route is used for edit a specific product of your app, ok? But how to check if `:id` param is a number really? A simple way is using resolve for this, job. 
+This route is used for edit a specific product of your app, ok? But how to check if `:id` param is a number really? A simple way is using resolve for this, job.
 
 Many apps do this in controllers, but it`s not correct because this responsible is more of route then controller and if resolve is used for it your app don`t load controller, view and other resources for that page.
 
@@ -47,7 +47,7 @@ Many apps do this in controllers, but it`s not correct because this responsible 
   ...
   $routeProvider.when('/product/:id/edit', {
     templateUrl: 'edit.html',
-    controller: 'ProductCtrl', 
+    controller: 'ProductCtrl',
     resolve: {
       // id validation happens here
       ...
@@ -59,7 +59,7 @@ Many apps do this in controllers, but it`s not correct because this responsible 
 
 ## Boilerplate
 
-> This code is using [ngRoute module](ngRoute module), but the concept is the same for other route modules.
+> This code is using [ngRoute module](https://docs.angularjs.org/api/ngRoute), but the concept is the same for other route modules.
 
 This feature is defined based in your necessity in app. For example, let`s take a look in this route spec:
 

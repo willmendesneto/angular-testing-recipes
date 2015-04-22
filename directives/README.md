@@ -137,17 +137,130 @@ In Directives there are many cases we need to work with pure DOM, using bindings
 
 ## scope
 
+> Because for directives scope is a great was store many gotchas
+
+In angular directives we can define diferent behaviours for application components scope. but how to test directive that use diferents behaviours for it?
+
+Directives can inherit parent scope passing for directive interface the information like this example:
+
+```javascript
+(function() {
+  'use strict';
+
+  function SampleDirective() {
+    var directive = {
+      scope: true
+    };
+
+    return directive;
+  }
+
+  angular.module('myApp')
+    .directive('sampleDirective', SampleDirective);
+
+}());
+```
+In this example, when we pass `scope: true` information from directive, automatically this new directive create a new scope based in parent scope (via prototipal inheritance).
+
+You have the possibility of disable the internal scope in your directive. This way the new directive access directly the parent scope and can modify the parent scope values too.
+
+```javascript
+(function() {
+  'use strict';
+
+  function SampleDirective() {
+    var directive = {
+      scope: false
+    };
+
+    return directive;
+  }
+
+  angular.module('myApp')
+    .directive('sampleDirective', SampleDirective);
+
+}());
+```
+
+In this 2 examples, the directive test is very easy, because controller/service/directive parent and
+directive scope is all the same. Testing the parent scope modifications automatically the directive scope is covered.
+
+Please, take a look in AngularJs wiki doc ["Understanding Scopes"](https://github.com/angular/angular.js/wiki/Understanding-Scopes) for more informations about scopes
+
 
 ## isolateScope
+
+These behaviours are very cool, but isolate scope doesn't follow this approach. This behaviour is assumed because...
+
+> directives should be reused
+
+Based in this idea, exist 3 ways to use and manipulate isolate scope between angularjs components in your application.
+
+
+ * All these examples are based in directive test boilerplate, more specific in
+
+ ```javascript
+   ...
+   // get the isolate scope of the directive
+   isolateScope = elem.isolateScope();
+   ...
+ ```
 
 
 ### equals (=)
 
+Equals signal `=` uses the two way data binding approach. This way, we can pass the angular model name for enable direct manipulation via directive internally.
+
+```javascript
+  ...
+  it('should expose a property to the isolateScope as `=`', function() {
+    scope.bar = 'baz';
+    scope.$apply();
+
+    expect(isolateScope.fooIsolate).toBe('baz');
+  });
+  ...
+```
+
 
 ### At sign (@)
 
+At sign `@` uses the Top-down approach based in one-way binding many times, can be used for pass an [angular expression](https://docs.angularjs.org/guide/expression) directly for directive too. With this approach the comunication between directive component and application is more powerfull based in idea that other components have more control in passed values from directive.
+
+```javascript
+  ...
+  it('should expose a property to the isolateScope as `@`', function() {
+    scope.baz = 'foo';
+    scope.$apply();
+
+    expect(isolateScope.bar).toBe('foo');
+  });
+  ...
+```
+
 
 ### ampersand (&)
+
+For last, ampersand character in directive with propose of enable the directives for call methods and access attributes of parent in a bottom-top approach. In this example we create `scope.doSomething()` method for validate, coverage and test our directive. Let's check this test.
+
+```javascript
+  ...
+
+  it('should expose a property to the isolateScope as `&`', function() {
+    spyOn(console, 'log');
+
+    scope.doSomething = function() {
+      console.log('lol');
+    };
+
+    isolateScope.baz();
+
+    expect(console.log).toHaveBeenCalledWith('lol');
+  });
+  ...
+```
+
+remember that `scope.doSomething()` method is passed for your directive and call internally by it. This method can be exist in a controller, service, etc.
 
 
 ## Transclusion

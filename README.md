@@ -58,3 +58,16 @@ Want to file a bug, or you would like to contribute with some code or improve do
 - [Directives](directives/)
 - [Routes](routes/)
 - [E2E](E2E/)
+
+
+## Authors
+
+**Wilson Mendes (willmendesneto)**
++ <https://plus.google.com/+WilsonMendes>
++ <https://twitter.com/willmendesneto>
++ <http://github.com/willmendesneto>
+
+**Ciro Nunes (cironunesdev)**
++ <https://plus.google.com/u/1/+CiroNunesDev>
++ <https://twitter.com/cironunesdev>
++ <https://github.com/cironunes>

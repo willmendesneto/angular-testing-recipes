@@ -36,7 +36,7 @@ describe('SampleController', function() {
         scope = $rootScope.$new();
 
         // load the SampleController mocking the $scope to the one created before
-        ctrl = $controller('SampleController', {
+        ctrl = _$controller_('SampleController', {
             $scope: scope
         };
     }));

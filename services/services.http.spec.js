@@ -142,7 +142,7 @@ describe('Service: SampleHttpService', function () {
     httpBackend.flush();
 
     expect(response.length).toBe(1);
-    expect(typeof response[1]).toBe('undefined');
+    expect(response[1]).toBeTypeOf('undefined');
     expect(deleted).toBeTruthy();
   });
 

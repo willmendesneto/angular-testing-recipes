@@ -2,6 +2,34 @@
 // https://github.com/angular/angular.js/blob/master/test/matchers.js
 beforeEach(function() {
   jasmine.addMatchers({
+    toBeInstanceOf: function(util, customEqualityTesters) {
+      return {
+        compare: function(actual, expected) {
+        	var notText = this.isNot ? ' not' : '';
+
+          var result = {
+            pass: actual instanceof expected
+          };
+
+        	result.message = 'Expected ' + actual.constructor.name + notText + ' is instance of ' + expected.name;
+        	return result;
+        }
+      };
+    },
+    toBeTypeOf: function(util, customEqualityTesters) {
+      return {
+        compare: function(actual, expected) {
+        	var notText = this.isNot ? ' not' : '';
+
+          var result = {
+            pass: typeof actual === expected
+          };
+
+        	result.message = 'Expected ' + (typeof actual) + notText + ' to be type of ' + (typeof expected);
+        	return result;
+        }
+      };
+    },
     toHaveClass: function(util, customEqualityTesters) {
       return {
         compare: function(actual, expected) {

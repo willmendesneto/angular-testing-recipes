@@ -35,7 +35,7 @@ describe('Service: SampleHttpService', function () {
       products = data;
     });
     httpBackend.flush();
-    expect(products instanceof Array).toBeTruthy();
+    expect(products).toBeInstanceOf(Array);
     expect(products.length).toBe(2);
     expect(products[0].id).toBe(1);
     expect(products[1].id).toBe(2);
@@ -49,7 +49,7 @@ describe('Service: SampleHttpService', function () {
     });
     httpBackend.flush();
 
-    expect(products instanceof Array).toBeTruthy();
+    expect(products).toBeInstanceOf(Array);
     expect(products.length).toBe(1);
     expect(products[0].id).toBe(1);
     expect(products[0].name).toBe('Phone');

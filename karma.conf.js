@@ -33,6 +33,10 @@ module.exports = {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      // source files, that you wanna generate coverage for
+      // do not include tests or libraries
+      // (these files will be instrumented by Istanbul)
+      '{controllers,services,directives,decorators,filters,routes}/*.js': ['coverage'],
       '**/*.tpl.html': 'ng-html2js'
     },
 
@@ -42,11 +46,13 @@ module.exports = {
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
     reporters: ['progress',  'coverage'],
 
-
     //  coverage reporter configuration
     coverageReporter: {
-      type:'html',
-      dir:'coverage'
+      dir:'coverage/',
+      reporters: [
+        { type: 'html', subdir: 'report-html' },
+        { type: 'lcov', subdir: 'report-lcov' }
+      ]
     },
 
     // web server port
@@ -63,7 +69,6 @@ module.exports = {
 
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: true,
-
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher

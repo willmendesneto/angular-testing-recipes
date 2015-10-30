@@ -21,11 +21,12 @@
   "homepage": "https://github.com/willmendesneto/angular-testing-recipes",
   "devDependencies": {
     "gulp": "^3.8.11",
+    "gulp-coveralls": "^0.1.4",
     "gulp-jshint": "^1.9.2",
     "gulp-util": "^3.0.4",
     "jshint-stylish": "^1.0.1",
     "karma": "^0.12.28",
-    "karma-coverage": "^0.2.7",
+    "karma-coverage": "^0.5.3",
     "karma-jasmine": "^0.3.3",
     "karma-phantomjs-launcher": "^0.1.4",
     "lodash": "^3.3.1",

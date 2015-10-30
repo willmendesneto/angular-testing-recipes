@@ -1,4 +1,5 @@
 # Angular-testing-recipes  [![Build Status](https://travis-ci.org/willmendesneto/angular-testing-recipes.png?branch=master)](https://travis-ci.org/willmendesneto/angular-testing-recipes)
+[![Coverage Status](https://coveralls.io/repos/willmendesneto/angular-testing-recipes/badge.svg?branch=master)](https://coveralls.io/r/willmendesneto/angular-testing-recipes?branch=master)
 
 > Unit and e2e testing recipes for AngularJS
 

@@ -8,6 +8,7 @@ var karmaConf = require('./karma.conf.js');
 var map = require('map-stream');
 var exitCode = 0;
 var totalLintErrors = 0;
+var coveralls = require('gulp-coveralls');
 
 function lintOnEnd() {
   var errString = totalLintErrors + '';
@@ -44,6 +45,11 @@ gulp.task('jshint', function() {
     });
 });
 
+gulp.task('test-coverage', ['test'], function() {
+  gulp.src('./coverage/report-lcov/lcov.info')
+    .pipe(coveralls());
+});
+
 process.on('exit', function () {
   process.nextTick(function () {
     var msg = "gulp '" + gulp.seq + "' failed";
@@ -52,4 +58,4 @@ process.on('exit', function () {
   });
 });
 
-gulp.task('default', ['jshint', 'test']);
+gulp.task('default', ['jshint', 'test-coverage']);

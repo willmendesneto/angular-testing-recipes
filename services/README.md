@@ -59,16 +59,17 @@ return service;
 Is very common to use `$http` in our services for manipulate HTTP Requests. For test envolving this kind of requisition we should use `$httpBackend` for mock responses based in HTTP verbs.
 
 ```javascript
-
 describe('Service: SampleHttpService', function () {
   'use strict';
 
   var SampleHttpService, httpBackend, q,
       response, MyModel;
+  var PRODUCTS_URL = '/api/products';
+  var PRODUCT_URL = '/api/product';
 
   beforeEach(module('myApp'));
 
-  beforeEach(inject(function (_SampleHttpService_, _$httpBackend_, $q) {
+  beforeEach(inject(function ($rootScope, _SampleHttpService_, _$httpBackend_, $q) {
     q = $q;
     httpBackend = _$httpBackend_;
     SampleHttpService = _SampleHttpService_;
@@ -81,6 +82,7 @@ describe('Service: SampleHttpService', function () {
       url: '/api/',
       cache: true
     });
+    $rootScope.showLogs = false;
   }));
 
   afterEach(function(){
@@ -89,7 +91,9 @@ describe('Service: SampleHttpService', function () {
   });
 
   it('#$get', function () {
-    httpBackend.whenGET('/api/products').respond(response);
+    httpBackend.whenGET(PRODUCTS_URL).respond(response);
+    httpBackend.expectGET(PRODUCTS_URL);
+
     var products = null;
     MyModel.$get('products').then(function(data){
       products = data;
@@ -102,7 +106,9 @@ describe('Service: SampleHttpService', function () {
   });
 
   it('#$find', function () {
-    httpBackend.whenGET('/api/products').respond(response);
+    httpBackend.whenGET(PRODUCTS_URL).respond(response);
+    httpBackend.expectGET(PRODUCTS_URL);
+
     var products = null;
     MyModel.$find('products', {id: 1}).then(function(data){
       products = data;
@@ -118,10 +124,10 @@ describe('Service: SampleHttpService', function () {
   it('#$post', function () {
     var message = {id: 4, name: 'DVD Player'};
 
-    httpBackend.whenPOST('/api/product', message).respond(function (method, url, data, headers) {
+    httpBackend.whenPOST(PRODUCT_URL, message).respond(function (method, url, data, headers) {
 
       expect(method).toBe('POST');
-      expect(url).toBe('/api/product');
+      expect(url).toBe(PRODUCT_URL);
       expect(!!headers).toBe(true);
       var newProduct = angular.fromJson(data);
       response.push(newProduct);
@@ -130,6 +136,7 @@ describe('Service: SampleHttpService', function () {
       result.push({ data: newProduct });
       return result;
     });
+    httpBackend.expectPOST(PRODUCT_URL);
 
     var result;
     MyModel.$post('product', message).then(function(){
@@ -144,12 +151,12 @@ describe('Service: SampleHttpService', function () {
   it('#$put', function () {
     var message = {id: 2, name: 'Monitor'};
 
-    httpBackend.whenPUT('/api/product', message).respond(function (method, url, data, headers) {
+    httpBackend.whenPUT(PRODUCT_URL, message).respond(function (method, url, data, headers) {
       var updatedProduct = angular.fromJson(data),
         resLength = response.length;
 
       expect(method).toBe('PUT');
-      expect(url).toBe('/api/product');
+      expect(url).toBe(PRODUCT_URL);
       expect(!!headers).toBe(true);
 
       for (var i = 0; i < resLength; i++){
@@ -161,6 +168,7 @@ describe('Service: SampleHttpService', function () {
         }
       }
     });
+    httpBackend.expectPUT(PRODUCT_URL);
 
     var update = false;
     MyModel.$put('product', message).then(function(){
@@ -194,6 +202,7 @@ describe('Service: SampleHttpService', function () {
         }
       }
     });
+    httpBackend.expectDELETE(/\/api\/product\/\d*/);
 
     var deleted = false;
     MyModel.$delete('product/' + productId).then(function(){
@@ -220,6 +229,10 @@ We should add 2 methods in `afterEach()` method too:
 2 - $httpBackend.verifyNoOutstandingRequest():
 
 > Verifies that there are no outstanding requests that need to be flushed. Typically, you would call this method following each test case that asserts requests using an "afterEach" clause.
+
+3 - Use $httpBackend.expect
+
+> Is a good approach uses $httpBackend.expect<GET|POST|PUT|DELETE> for check what was url called for your `$http` service consume. This is a simple method for do this job.
 
 
 ## Promises and Methods from other services

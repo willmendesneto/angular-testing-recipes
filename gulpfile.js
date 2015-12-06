@@ -3,7 +3,7 @@ var gutil = require('gulp-util');
 var jshint = require('gulp-jshint');
 var stylish = require('jshint-stylish');
 var _ = require('lodash');
-var karma = require('karma').server;
+var Server = require('karma').Server;
 var karmaConf = require('./karma.conf.js');
 var map = require('map-stream');
 var exitCode = 0;
@@ -19,11 +19,13 @@ function lintOnEnd() {
 }
 
 gulp.task('test', function(done) {
-  karma.start(_.assign({}, karmaConf, { singleRun: true }), done);
+  var server = new Server(_.assign({}, karmaConf, { singleRun: true }), done);
+  server.start();
 });
 
 gulp.task('tdd', function(done) {
-  karma.start(karmaConf, done);
+  var server = new Server(karmaConf, done);
+  server.start();
 });
 
 gulp.task('jshint', function() {

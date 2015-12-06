@@ -17,6 +17,7 @@
       ' <h2>{{ bar }}</h2>' +
       ' <div ng-transclude></div>' +
       '</div>',
+      restrict: 'A',
       link: linkFn,
       scope: {
         fooIsolate: '=',
